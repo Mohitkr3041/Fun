@@ -28,8 +28,8 @@ export class VideoCompositor {
   public height: number = window.innerHeight;
 
   public isCameraReady: boolean = false;
-  public dimming: number = 1.0;
-  public contrast: number = 1.22;
+  public dimming: number = 0.75;
+  public contrast: number = 1.5;
 
   private stream: MediaStream | null = null;
 
@@ -165,7 +165,7 @@ export class VideoCompositor {
     ctx.globalCompositeOperation = 'source-over';
 
     // 1. Deep midnight background (behind webcam)
-    ctx.fillStyle = '#030510';
+    ctx.fillStyle = '#100303';
     ctx.fillRect(0, 0, width, height);
 
     // 2. Webcam background
@@ -217,12 +217,20 @@ export class VideoCompositor {
 
       // 1. Deep navy & dark purple night-sky perimeter tint
       const nightSkyGrad = ctx.createRadialGradient(
-        width / 2, height * 0.45, Math.min(width, height) * 0.25,
-        width / 2, height * 0.45, Math.max(width, height) * 0.8
+        width / 2,
+        height * 0.45,
+        Math.min(width, height) * 0.25,
+        width / 2,
+        height * 0.45,
+        Math.max(width, height) * 0.8
       );
+
       nightSkyGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
-      nightSkyGrad.addColorStop(0.55, 'rgba(4, 10, 34, 0.12)'); // Deep navy
-      nightSkyGrad.addColorStop(1, 'rgba(28, 8, 48, 0.22)');   // Regal dark purple
+      nightSkyGrad.addColorStop(0.55, 'rgba(4, 10, 34, 0.12)');
+      nightSkyGrad.addColorStop(1, 'rgba(28, 8, 48, 0.22)');
+
+      ctx.fillStyle = nightSkyGrad;
+      ctx.fillRect(0, 0, width, height);
       ctx.fillStyle = nightSkyGrad;
       ctx.fillRect(0, 0, width, height);
 

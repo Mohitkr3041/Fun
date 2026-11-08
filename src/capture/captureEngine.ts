@@ -32,7 +32,7 @@ export class CaptureEngine {
   private startTime = 0;
   private timerInterval = 0;
 
-  private readonly MAX_DURATION_SEC = 30;
+  private readonly MAX_DURATION_SEC = 90;
 
   private readonly OUTPUT_WIDTH = 1920;
   private readonly OUTPUT_HEIGHT = 1080;
